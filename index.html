@@ -5,14 +5,13 @@
   <style>
     body {
       text-align: center;
-      font-family: Arial, sans-serif;
+      font-family: "Arial", sans-serif;
       background: linear-gradient(to bottom, #ffb6c1, #ffd1dc);
       height: 100vh;
-      margin: 0;
       display: flex;
       flex-direction: column;
-      align-items: center;
       justify-content: center;
+      align-items: center;
       overflow: hidden;
     }
 
@@ -21,26 +20,26 @@
       text-shadow: 2px 2px white;
     }
 
-    #yes, #no {
-      border: none;
-      border-radius: 20px;
-      padding: 12px 25px;
-      cursor: pointer;
-      margin: 10px;
-    }
-
     #yes {
       font-size: 22px;
+      padding: 12px 25px;
       background: #ff85a2;
       color: white;
+      border: none;
+      border-radius: 20px;
+      cursor: pointer;
       transition: 0.3s;
     }
 
     #no {
       font-size: 20px;
+      padding: 10px 20px;
       background: #ff4d6d;
       color: white;
-      position: absolute; /* needed for running effect */
+      border: none;
+      border-radius: 20px;
+      cursor: pointer;
+      position: relative;
     }
 
     #message {
@@ -48,9 +47,10 @@
       font-size: 18px;
       color: #d6336c;
       font-weight: bold;
+      min-height: 30px;
     }
 
-    /* ----- ENVELOPE LETTER DESIGN ----- */
+    /* Letter styles */
     #letter-container {
       display: none;
       margin-top: 40px;
@@ -106,57 +106,50 @@
 
 <body>
 
-  <div id="main">
-    <h1>Be mine ulit?😁</h1>
+  <h1>Will you be my Valentine? 💞</h1>
 
-    <button id="yes" onclick="sayYes()">Yes 💕</button>
-    <button id="no" onmouseover="runAway()">No 😔</button>
+  <button id="yes" onclick="sayYes()">Yes 💕</button>
+  <button id="no" onclick="sayNo()">No 😔</button>
 
-    <p id="message"></p>
-  </div>
+  <p id="message"></p>
 
-  <!-- LETTER SECTION (appears after Yes) -->
+  <!-- Letter container -->
   <div id="letter-container">
     <h2 style="color:#d6336c;">Your Letter to Her 💌</h2>
-
     <div class="envelope">
       <div class="flap"></div>
       <div class="paper">
-        <textarea placeholder="Write your romantic letter here... 💕"></textarea>
+        <textarea readonly>
+Mahal kong [Name],
+
+Hindi ko na kayang itago pa ang nararamdaman ko. Sana ay maging atin ang bawat sandali, at palaging magkasama tayo. 💕
+
+Love,
+[Your Name]
+        </textarea>
       </div>
     </div>
   </div>
 
 <script>
   let size = 22;
-
-  const messages = [
-    "Sigurado kaba boss? 🥺",
-    "PLEEEEEAAAASSSSSEEEE 👉👈",
-    "Libre taka piso😁",
-    "Pls na ohhh, pls pls pls",
-    "Ansakit mo namn☹️",
-    "Last chance boiii"
-  ];
-
   let noCount = 0;
 
-  function runAway() {
-    const noBtn = document.getElementById("no");
-    const yesBtn = document.getElementById("yes");
+  function sayNo() {
+    const messages = [
+      "Sigurado kaba boss? 🥺",
+      "PLEEEEEAAAASSSSSEEEE 👉👈",
+      "Libre taka piso😁",
+      "Pls na ohhh, pls pls pls",
+      "Ansakit mo namn☹️",
+      "Last chance boiii"
+    ];
 
-    // make Yes bigger every time No runs
-    size += 8;
-    yesBtn.style.fontSize = size + "px";
+    // Make Yes bigger
+    size += 12;
+    document.getElementById("yes").style.fontSize = size + "px";
 
-    // random position on screen
-    const x = Math.random() * (window.innerWidth - 120);
-    const y = Math.random() * (window.innerHeight - 80);
-
-    noBtn.style.left = x + "px";
-    noBtn.style.top = y + "px";
-
-    // change message
+    // Change text
     document.getElementById("message").innerText =
       messages[noCount % messages.length];
 
@@ -164,11 +157,27 @@
   }
 
   function sayYes() {
-    // hide question + buttons
-    document.getElementById("main").style.display = "none";
+    // Show celebration first
+    document.body.innerHTML = `
+      <h1 style="color:#d6336c;">YAYYYY!!! 💖💖💖</h1>
+      <p>YEEEEEYYYYYY</p>
+      <p>Happy Valentine's Day boss :)</p>
+    `;
 
-    // show letter
-    document.getElementById("letter-container").style.display = "block";
+    // After 3 seconds, show the letter
+    setTimeout(() => {
+      document.body.innerHTML = `
+        <h1 style="color:#d6336c;">Your Letter to Her 💌</h1>
+        <div class="envelope">
+          <div class="flap"></div>
+          <div class="paper">
+            <textarea readonly>
+Foolish I shall be, if it means having you here with me. You can't reason with love, so I wish for you to see the most asinine thoughts appearing in my head. Your love makes me feel complete, after all, a soulmate isn't your missing peuce; but a compliment. Your presence to me is like a moth to a flame, always drawing me in the most unexpected ways. The way my finger drifts to your profile unbeknownst to me, the way my gaze slowly moves to your general direction, and they way you suddenly wander in my mind like an annoying voice. I've tried to move on, but I couldn't, di ko kaya eh. Perhaps loving you is the most natural and easiest thing I could do because maybe it's in my nature. I'm a slave to your love, a humble believer of your grace, and you act as my knowledge that guides me as a scholar. To not see beauty in you means to have lost my sight, to not love you means to have lost my heart, to not think of you means to have lost my mind. It feels blasphemous just stopping to think of you. It's blasphemous for it goes against my nature and my very being. A love that will slowly devour me, and yet I face it with such pride for it's love that's yours. WBAHAHHA, seryusuhon, noh? In all seriousness.. SERIOUSNESS??? joke😁, pero seryoso, feel ko aram mo mn sana na ika ang crush ko eh. Yis po, opo, mahal pa rin kita, at walang iba. Saimo mn sana ako mabalik eh, sa hug mo maski dae taka pa nahahug. Diyan pa lng eh, ano laban ki iba? Yes po, gabos na tinaram ko about sa secret crush ko, ika ito. Naka move on na kuta ako saimo, napanaginipan taka pa lugod ki tulong aldaw kang sabi ko na ito😒 Kaya, I beg of you boss🥺🥺 Can we try again??? Ano daw? WBHAHAHAHAH, pero frfr, let's try again po. Let's learn to love and to live with each other without giving up🥺🥺 Iyo ah? Promise mo na yan maski dai mo mn sana ata ini mababasa gabos, ay iyo palan, isascan mo🫩 WBABBABABA, basta, iyo, iyo ngani, opo, basta sabi ko, iyo. Thenks po, Happy Valentines😁
+            </textarea>
+          </div>
+        </div>
+      `;
+    }, 3000); // 3000ms = 3 seconds
   }
 </script>
 
