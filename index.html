@@ -50,6 +50,12 @@
       min-height: 30px;
     }
 
+    /* Celebration message */
+    #celebration {
+      display: none;
+      color: #d6336c;
+    }
+
     /* Letter styles */
     #letter-container {
       display: none;
@@ -106,12 +112,20 @@
 
 <body>
 
-  <h1>Will you be my Valentine? 💞</h1>
+  <!-- Original question -->
+  <h1>Be mine ulit?🥹</h1>
 
   <button id="yes" onclick="sayYes()">Yes 💕</button>
   <button id="no" onclick="sayNo()">No 😔</button>
 
   <p id="message"></p>
+
+  <!-- Celebration message -->
+  <div id="celebration">
+    <h1>YAYYYY!!! 💖💖💖</h1>
+    <p>YEEEEEYYYYYY</p>
+    <p>Happy Valentine's Day boss :)</p>
+  </div>
 
   <!-- Letter container -->
   <div id="letter-container">
@@ -157,32 +171,20 @@ Love,
   }
 
   function sayYes() {
+    // Hide original buttons and question
+    document.querySelector("h1").style.display = "none";
+    document.getElementById("yes").style.display = "none";
+    document.getElementById("no").style.display = "none";
+    document.getElementById("message").style.display = "none";
+
     // Show celebration first
-    document.body.innerHTML = `
-      <h1 style="color:#d6336c;">YAYYYY!!! 💖💖💖</h1>
-      <p>YEEEEEYYYYYY</p>
-      <p>Happy Valentine's Day boss :)</p>
-    `;
+    document.getElementById("celebration").style.display = "block";
 
-    // After 3 seconds, show the letter
+    // After 3 seconds, hide celebration and show letter
     setTimeout(() => {
-      document.body.innerHTML = `
-        <h1 style="color:#d6336c;">Your Letter to Her 💌</h1>
-        <div class="envelope">
-          <div class="flap"></div>
-          <div class="paper">
-            <textarea readonly>
-Mahal kong [Name],
-
-Hindi ko na kayang itago pa ang nararamdaman ko. Sana ay maging atin ang bawat sandali, at palaging magkasama tayo. 💕
-
-Love,
-[Your Name]
-            </textarea>
-          </div>
-        </div>
-      `;
-    }, 3000); // 3000ms = 3 seconds
+      document.getElementById("celebration").style.display = "none";
+      document.getElementById("letter-container").style.display = "block";
+    }, 3000); // 3 seconds delay
   }
 </script>
 
