@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Be My Valentine?</title>
+  <style>
+    body {
+      text-align: center;
+      font-family: "Arial", sans-serif;
+      background: linear-gradient(to bottom, #ffb6c1, #ffd1dc);
+      height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      overflow: hidden;
+    }
+
+    h1 {
+      color: #d6336c;
+      text-shadow: 2px 2px white;
+    }
+
+    #yes {
+      font-size: 22px;
+      padding: 12px 25px;
+      background: #ff85a2;
+      color: white;
+      border: none;
+      border-radius: 20px;
+      cursor: pointer;
+      transition: 0.3s;
+    }
+
+    #no {
+      font-size: 20px;
+      padding: 10px 20px;
+      background: #ff4d6d;
+      color: white;
+      border: none;
+      border-radius: 20px;
+      cursor: pointer;
+      position: relative;
+    }
+
+    #message {
+      margin-top: 20px;
+      font-size: 18px;
+      color: #d6336c;
+      font-weight: bold;
+      min-height: 30px;
+    }
+  </style>
+</head>
+
+<body>
+
+  <h1>Babalik ka ba? ☹️</h1>
+
+  <button id="yes" onclick="sayYes()">Yes 💕</button>
+  <button id="no" onclick="sayNo()">No 😔</button>
+
+  <p id="message"></p>
+
+  <script>
+    let size = 22;
+    let noCount = 0;
+
+    function sayNo() {
+      const messages = [
+        "Sigurado kaba boss? 🥺",
+        "Pleeeaaaasssseee? 👉👈",
+        "libre taka piso😁",
+        "Pls pls pls ☹️",
+        "Ansakit mo namn 😭",
+        "gege 😔"
+      ];
+
+      // Make Yes bigger
+      size += 12;
+      document.getElementById("yes").style.fontSize = size + "px";
+
+      // Change text
+      document.getElementById("message").innerText =
+        messages[noCount % messages.length];
+
+      noCount++;
+    }
+
+    function sayYes() {
+      document.body.innerHTML = `
+        <h1 style="color:#d6336c;">YAYYYY!!! 💖💖💖</h1>
+        <p>YEEEEYYYYYYY!!!</p>
+        <p>Labyu boss:)</p>
+      `;
+    }
+  </script>
+
+</body>
+</html>
