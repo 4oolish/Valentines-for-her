@@ -8,12 +8,9 @@
       font-family: "Arial", sans-serif;
       background: linear-gradient(to bottom, #ffb6c1, #ffd1dc);
       height: 100vh;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
+      margin: 0;
       overflow: hidden;
-      transition: background 0.5s;
+      position: relative; /* Important for absolute buttons */
     }
 
     h1 {
@@ -30,6 +27,7 @@
       border-radius: 20px;
       cursor: pointer;
       transition: 0.3s;
+      position: relative;
     }
 
     #no {
@@ -52,7 +50,6 @@
       min-height: 30px;
     }
 
-    /* Celebration message */
     #celebration {
       display: none;
       color: #d6336c;
@@ -60,7 +57,6 @@
       transition: opacity 1s;
     }
 
-    /* Letter styles */
     #letter-container {
       display: none;
       margin-top: 40px;
@@ -115,10 +111,8 @@
 
   </style>
 </head>
-
 <body>
 
-  <!-- Original question -->
   <h1>Be mine ulit? 💞</h1>
 
   <button id="yes" onclick="sayYes()">Yes 💕</button>
@@ -126,14 +120,12 @@
 
   <p id="message"></p>
 
-  <!-- Celebration message -->
   <div id="celebration">
     <h1>YAYYYY!!! 💖💖💖</h1>
     <p>YEEEEEYYYYYY</p>
     <p>Happy Valentine's Day boss :)</p>
   </div>
 
-  <!-- Letter container -->
   <div id="letter-container">
     <h2 style="color:#d6336c;">Your Letter to Her 💌</h2>
     <div class="envelope">
@@ -185,20 +177,23 @@ Thenks po, Happy Valentines 😁
     const noBtn = document.getElementById("no");
     const yesBtn = document.getElementById("yes");
 
-    // make Yes bigger
-    size += 8;
+    size += 28;
     yesBtn.style.fontSize = size + "px";
 
     const btnWidth = noBtn.offsetWidth;
     const btnHeight = noBtn.offsetHeight;
     const yesRect = yesBtn.getBoundingClientRect();
+    const padding = 20; // margin from edges
     let x, y;
-    let safeDistance = 120;
+    let safeDistance = 150; // distance from Yes button
 
-    // Ensure No doesn't spawn on top of Yes
+    // Generate a position not overlapping Yes button
+    let attempts = 0;
     do {
-      x = Math.random() * (window.innerWidth - btnWidth);
-      y = Math.random() * (window.innerHeight - btnHeight);
+      x = padding + Math.random() * (window.innerWidth - btnWidth - padding*2);
+      y = padding + Math.random() * (window.innerHeight - btnHeight - padding*2);
+      attempts++;
+      if (attempts > 100) break; // fail-safe
     } while (
       Math.abs(x - yesRect.left) < safeDistance &&
       Math.abs(y - yesRect.top) < safeDistance
@@ -207,7 +202,6 @@ Thenks po, Happy Valentines 😁
     noBtn.style.left = x + "px";
     noBtn.style.top = y + "px";
 
-    // change message
     const messages = [
       "Sigurado kaba boss? 🥺",
       "PLEEEEEAAAASSSSSEEEE 👉👈",
@@ -222,20 +216,17 @@ Thenks po, Happy Valentines 😁
   }
 
   function sayYes() {
-    // Hide original question/buttons
     document.querySelector("h1").style.display = "none";
     document.getElementById("yes").style.display = "none";
     document.getElementById("no").style.display = "none";
     document.getElementById("message").style.display = "none";
 
-    // Show celebration with fade-in
     const celebration = document.getElementById("celebration");
     celebration.style.display = "block";
     setTimeout(() => {
       celebration.style.opacity = 1;
     }, 50);
 
-    // After 3 seconds, fade out celebration and fade in letter
     setTimeout(() => {
       celebration.style.opacity = 0;
 
@@ -244,7 +235,7 @@ Thenks po, Happy Valentines 😁
       setTimeout(() => {
         letter.style.opacity = 1;
       }, 50);
-    }, 3000); // 3 seconds
+    }, 3000);
   }
 </script>
 
