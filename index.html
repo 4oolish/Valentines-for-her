@@ -5,13 +5,14 @@
   <style>
     body {
       text-align: center;
-      font-family: "Arial", sans-serif;
+      font-family: Arial, sans-serif;
       background: linear-gradient(to bottom, #ffb6c1, #ffd1dc);
       height: 100vh;
+      margin: 0;
       display: flex;
       flex-direction: column;
-      justify-content: center;
       align-items: center;
+      justify-content: center;
       overflow: hidden;
     }
 
@@ -20,26 +21,26 @@
       text-shadow: 2px 2px white;
     }
 
-    #yes {
-      font-size: 22px;
-      padding: 12px 25px;
-      background: #ff85a2;
-      color: white;
+    #yes, #no {
       border: none;
       border-radius: 20px;
+      padding: 12px 25px;
       cursor: pointer;
+      margin: 10px;
+    }
+
+    #yes {
+      font-size: 22px;
+      background: #ff85a2;
+      color: white;
       transition: 0.3s;
     }
 
     #no {
       font-size: 20px;
-      padding: 10px 20px;
       background: #ff4d6d;
       color: white;
-      border: none;
-      border-radius: 20px;
-      cursor: pointer;
-      position: relative;
+      position: absolute; /* needed for running effect */
     }
 
     #message {
@@ -47,53 +48,129 @@
       font-size: 18px;
       color: #d6336c;
       font-weight: bold;
-      min-height: 30px;
     }
+
+    /* ----- ENVELOPE LETTER DESIGN ----- */
+    #letter-container {
+      display: none;
+      margin-top: 40px;
+      width: 420px;
+      position: relative;
+    }
+
+    .envelope {
+      width: 420px;
+      height: 260px;
+      background: #d1a05f;
+      border-radius: 10px;
+      position: relative;
+      box-shadow: 0 8px 15px rgba(0,0,0,0.2);
+    }
+
+    .flap {
+      width: 0;
+      height: 0;
+      border-left: 210px solid transparent;
+      border-right: 210px solid transparent;
+      border-top: 140px solid #b88a4b;
+      position: absolute;
+      top: 0;
+      left: 0;
+    }
+
+    .paper {
+      width: 360px;
+      height: 260px;
+      background: #fff5e6;
+      position: absolute;
+      top: -150px;
+      left: 30px;
+      border-radius: 10px;
+      box-shadow: 0 5px 10px rgba(0,0,0,0.2);
+      padding: 20px;
+    }
+
+    textarea {
+      width: 100%;
+      height: 200px;
+      border: none;
+      background: transparent;
+      font-family: cursive;
+      font-size: 16px;
+      outline: none;
+      resize: none;
+    }
+
   </style>
 </head>
 
 <body>
 
-  <h1>Babalik ka ba? ☹️</h1>
+  <div id="main">
+    <h1>Be mine ulit?😁</h1>
 
-  <button id="yes" onclick="sayYes()">Yes 💕</button>
-  <button id="no" onclick="sayNo()">No 😔</button>
+    <button id="yes" onclick="sayYes()">Yes 💕</button>
+    <button id="no" onmouseover="runAway()">No 😔</button>
 
-  <p id="message"></p>
+    <p id="message"></p>
+  </div>
 
-  <script>
-    let size = 22;
-    let noCount = 0;
+  <!-- LETTER SECTION (appears after Yes) -->
+  <div id="letter-container">
+    <h2 style="color:#d6336c;">Your Letter to Her 💌</h2>
 
-    function sayNo() {
-      const messages = [
-        "Sigurado kaba boss? 🥺",
-        "Pleeeaaaasssseee? 👉👈",
-        "libre taka piso😁",
-        "Pls pls pls ☹️",
-        "Ansakit mo namn 😭",
-        "gege 😔"
-      ];
+    <div class="envelope">
+      <div class="flap"></div>
+      <div class="paper">
+        <textarea placeholder="Write your romantic letter here... 💕"></textarea>
+      </div>
+    </div>
+  </div>
 
-      // Make Yes bigger
-      size += 12;
-      document.getElementById("yes").style.fontSize = size + "px";
+<script>
+  let size = 22;
 
-      // Change text
-      document.getElementById("message").innerText =
-        messages[noCount % messages.length];
+  const messages = [
+    "Sigurado kaba boss? 🥺",
+    "PLEEEEEAAAASSSSSEEEE 👉👈",
+    "Libre taka piso😁",
+    "Pls na ohhh, pls pls pls",
+    "Ansakit mo namn☹️",
+    "Last chance boiii"
+  ];
 
-      noCount++;
-    }
+  let noCount = 0;
 
-    function sayYes() {
-      document.body.innerHTML = `
-        <h1 style="color:#d6336c;">YAYYYY!!! 💖💖💖</h1>
-        <p>YEEEEYYYYYYY!!!</p>
-        <p>Labyu boss:)</p>
-      `;
-    }
-  </script>
+  function runAway() {
+    const noBtn = document.getElementById("no");
+    const yesBtn = document.getElementById("yes");
+
+    // make Yes bigger every time No runs
+    size += 8;
+    yesBtn.style.fontSize = size + "px";
+
+    // random position on screen
+    const x = Math.random() * (window.innerWidth - 120);
+    const y = Math.random() * (window.innerHeight - 80);
+
+    noBtn.style.left = x + "px";
+    noBtn.style.top = y + "px";
+
+    // change message
+    document.getElementById("message").innerText =
+      messages[noCount % messages.length];
+
+    noCount++;
+  }
+
+  function sayYes() {
+    // hide question + buttons
+    document.getElementById("main").style.display = "none";
+
+    // show letter
+    document.getElementById("letter-container").style.display = "block";
+  }
+</script>
 
 </body>
 </html>
