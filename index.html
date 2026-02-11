@@ -10,7 +10,7 @@
       height: 100vh;
       margin: 0;
       overflow: hidden;
-      position: relative; /* Important for absolute buttons */
+      position: relative; /* for absolute buttons */
     }
 
     h1 {
@@ -50,6 +50,7 @@
       min-height: 30px;
     }
 
+    /* Celebration message */
     #celebration {
       display: none;
       color: #d6336c;
@@ -57,18 +58,20 @@
       transition: opacity 1s;
     }
 
+    /* Letter container */
     #letter-container {
       display: none;
-      margin-top: 40px;
-      width: 420px;
+      margin: 40px auto 0 auto; /* center horizontally */
+      width: 90%;               /* responsive width */
+      max-width: 420px;
       position: relative;
       opacity: 0;
       transition: opacity 1.5s;
     }
 
     .envelope {
-      width: 420px;
-      height: 260px;
+      width: 100%;              
+      aspect-ratio: 420 / 260;  /* keep envelope ratio */
       background: #d1a05f;
       border-radius: 10px;
       position: relative;
@@ -78,37 +81,43 @@
     .flap {
       width: 0;
       height: 0;
-      border-left: 210px solid transparent;
-      border-right: 210px solid transparent;
-      border-top: 140px solid #b88a4b;
+      border-left: 50% solid transparent;
+      border-right: 50% solid transparent;
+      border-top: 50% solid #b88a4b;
       position: absolute;
       top: 0;
       left: 0;
     }
 
     .paper {
-      width: 360px;
-      height: 260px;
+      width: 85%;
+      height: 85%;
       background: #fff5e6;
       position: absolute;
-      top: -150px;
-      left: 30px;
+      top: 10%;
+      left: 7.5%;
       border-radius: 10px;
       box-shadow: 0 5px 10px rgba(0,0,0,0.2);
-      padding: 20px;
+      padding: 10px;
     }
 
     textarea {
       width: 100%;
-      height: 200px;
+      height: 100%;
       border: none;
       background: transparent;
       font-family: cursive;
-      font-size: 16px;
+      font-size: 14px;
       outline: none;
       resize: none;
     }
 
+    @media (max-width: 500px) {
+      h1 { font-size: 20px; }
+      #yes { font-size: 18px; padding: 10px 20px; }
+      #no { font-size: 16px; padding: 8px 16px; }
+      textarea { font-size: 12px; }
+    }
   </style>
 </head>
 <body>
@@ -177,23 +186,22 @@ Thenks po, Happy Valentines 😁
     const noBtn = document.getElementById("no");
     const yesBtn = document.getElementById("yes");
 
-    size += 28;
+    size += 8;
     yesBtn.style.fontSize = size + "px";
 
     const btnWidth = noBtn.offsetWidth;
     const btnHeight = noBtn.offsetHeight;
     const yesRect = yesBtn.getBoundingClientRect();
-    const padding = 20; // margin from edges
+    const padding = 10;
     let x, y;
-    let safeDistance = 150; // distance from Yes button
+    let safeDistance = 120;
 
-    // Generate a position not overlapping Yes button
     let attempts = 0;
     do {
       x = padding + Math.random() * (window.innerWidth - btnWidth - padding*2);
       y = padding + Math.random() * (window.innerHeight - btnHeight - padding*2);
       attempts++;
-      if (attempts > 100) break; // fail-safe
+      if (attempts > 100) break;
     } while (
       Math.abs(x - yesRect.left) < safeDistance &&
       Math.abs(y - yesRect.top) < safeDistance
