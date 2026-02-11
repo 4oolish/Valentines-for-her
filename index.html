@@ -13,6 +13,7 @@
       justify-content: center;
       align-items: center;
       overflow: hidden;
+      transition: background 0.5s;
     }
 
     h1 {
@@ -39,7 +40,8 @@
       border: none;
       border-radius: 20px;
       cursor: pointer;
-      position: relative;
+      position: absolute;
+      transition: all 0.2s ease;
     }
 
     #message {
@@ -54,6 +56,8 @@
     #celebration {
       display: none;
       color: #d6336c;
+      opacity: 0;
+      transition: opacity 1s;
     }
 
     /* Letter styles */
@@ -62,6 +66,8 @@
       margin-top: 40px;
       width: 420px;
       position: relative;
+      opacity: 0;
+      transition: opacity 1.5s;
     }
 
     .envelope {
@@ -113,10 +119,10 @@
 <body>
 
   <!-- Original question -->
-  <h1>Be mine ulit?🥹</h1>
+  <h1>Be mine ulit? 💞</h1>
 
   <button id="yes" onclick="sayYes()">Yes 💕</button>
-  <button id="no" onclick="sayNo()">No 😔</button>
+  <button id="no" onmouseover="runAway()">No 😔</button>
 
   <p id="message"></p>
 
@@ -134,12 +140,7 @@
       <div class="flap"></div>
       <div class="paper">
         <textarea readonly>
-Mahal kong [Name],
-
-Hindi ko na kayang itago pa ang nararamdaman ko. Sana ay maging atin ang bawat sandali, at palaging magkasama tayo. 💕
-
-Love,
-[Your Name]
+Foolish I shall be, if it means having you here with me. You can't reason with love, so I wish for you to see the most asinine thoughts appearing in my head. Your love makes me feel complete, after all, a soulmate isn't your missing peuce; but a compliment. Your presence to me is like a moth to a flame, always drawing me in the most unexpected ways. The way my finger drifts to your profile unbeknownst to me, the way my gaze slowly moves to your general direction, and they way you suddenly wander in my mind like an annoying voice. I've tried to move on, but I couldn't, di ko kaya eh. Perhaps loving you is the most natural and easiest thing I could do because maybe it's in my nature. I'm a slave to your love, a humble believer of your grace, and you act as my knowledge that guides me as a scholar. To not see beauty in you means to have lost my sight, to not love you means to have lost my heart, to not think of you means to have lost my mind. It feels blasphemous just stopping to think of you. It's blasphemous for it goes against my nature and my very being. A love that will slowly devour me, and yet I face it with such pride for it's love that's yours. WBAHAHHA, seryusuhon, noh? In all seriousness.. SERIOUSNESS??? joke😁, pero seryoso, feel ko aram mo mn sana na ika ang crush ko eh. Yis po, opo, mahal pa rin kita, at walang iba. Saimo mn sana ako mabalik eh, sa hug mo maski dae taka pa nahahug. Diyan pa lng eh, ano laban ki iba? Yes po, gabos na tinaram ko about sa secret crush ko, ika ito. Naka move on na kuta ako saimo, napanaginipan taka pa lugod ki tulong aldaw kang sabi ko na ito😒 Kaya, I beg of you boss🥺🥺 Can we try again??? Ano daw? WBHAHAHAHAH, pero frfr, let's try again po. Let's learn to love and to live with each other without giving up🥺🥺 Iyo ah? Promise mo na yan maski dai mo mn sana ata ini mababasa gabos, ay iyo palan, isascan mo🫩 WBABBABABA, basta, iyo, iyo ngani, opo, basta sabi ko, iyo. Thenks po, Happy Valentines😁
         </textarea>
       </div>
     </div>
@@ -149,7 +150,22 @@ Love,
   let size = 22;
   let noCount = 0;
 
-  function sayNo() {
+  function runAway() {
+    const noBtn = document.getElementById("no");
+    const yesBtn = document.getElementById("yes");
+
+    // make Yes bigger
+    size += 8;
+    yesBtn.style.fontSize = size + "px";
+
+    // random position on screen
+    const x = Math.random() * (window.innerWidth - 120);
+    const y = Math.random() * (window.innerHeight - 80);
+
+    noBtn.style.left = x + "px";
+    noBtn.style.top = y + "px";
+
+    // change message
     const messages = [
       "Sigurado kaba boss? 🥺",
       "PLEEEEEAAAASSSSSEEEE 👉👈",
@@ -158,33 +174,35 @@ Love,
       "Ansakit mo namn☹️",
       "Last chance boiii"
     ];
-
-    // Make Yes bigger
-    size += 12;
-    document.getElementById("yes").style.fontSize = size + "px";
-
-    // Change text
     document.getElementById("message").innerText =
       messages[noCount % messages.length];
-
     noCount++;
   }
 
   function sayYes() {
-    // Hide original buttons and question
+    // Hide original question/buttons
     document.querySelector("h1").style.display = "none";
     document.getElementById("yes").style.display = "none";
     document.getElementById("no").style.display = "none";
     document.getElementById("message").style.display = "none";
 
-    // Show celebration first
-    document.getElementById("celebration").style.display = "block";
-
-    // After 3 seconds, hide celebration and show letter
+    // Show celebration with fade-in
+    const celebration = document.getElementById("celebration");
+    celebration.style.display = "block";
     setTimeout(() => {
-      document.getElementById("celebration").style.display = "none";
-      document.getElementById("letter-container").style.display = "block";
-    }, 3000); // 3 seconds delay
+      celebration.style.opacity = 1;
+    }, 50);
+
+    // After 3 seconds, fade out celebration and fade in letter
+    setTimeout(() => {
+      celebration.style.opacity = 0;
+
+      const letter = document.getElementById("letter-container");
+      letter.style.display = "block";
+      setTimeout(() => {
+        letter.style.opacity = 1;
+      }, 50);
+    }, 3000); // 3 seconds
   }
 </script>
 
