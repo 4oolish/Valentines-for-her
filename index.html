@@ -140,7 +140,7 @@
       <div class="flap"></div>
       <div class="paper">
         <textarea readonly>
-     Foolish I shall be, if it means having you here with me. 
+Foolish I shall be, if it means having you here with me. 
 You can't reason with love, so I wish for you to see the most asinine thoughts appearing in my head. 
 
 Your love makes me feel complete. After all, a soulmate isn't your missing piece, but a compliment. 
@@ -165,77 +165,4 @@ Saimo mn sana ako mabalik eh, sa hug mo maski dae taka pa nahahug.
 Diyan pa lng eh, ano laban ki iba? 
 
 Yes po, gabos na tinaram ko about sa secret crush ko, ika ito. 
-Naka move on na kuta ako saimo, napanaginipan taka pa lugod ki tulong aldaw kang sabi ko na ito 😒 
-Kaya, I beg of you boss 🥺🥺 Can we try again??? Ano daw? WBHAHAHAHAH, pero frfr, let's try again po. 
-
-Let's learn to love and to live with each other without giving up 🥺🥺 
-Iyo ah? Promise mo na yan maski dai mo mn sana ata ini mababasa gabos, ay iyo palan, isascan mo 🫩 WBABBABABA, basta, iyo, iyo ngani, opo, basta sabi ko, iyo. 
-
-Thenks po, Happy Valentines 😁
-        </textarea>
-      </div>
-    </div>
-  </div>
-
-<script>
-  let size = 22;
-  let noCount = 0;
-
-  function runAway() {
-    const noBtn = document.getElementById("no");
-    const yesBtn = document.getElementById("yes");
-
-    // make Yes bigger
-    size += 8;
-    yesBtn.style.fontSize = size + "px";
-
-    // random position on screen
-    const x = Math.random() * (window.innerWidth - 120);
-    const y = Math.random() * (window.innerHeight - 80);
-
-    noBtn.style.left = x + "px";
-    noBtn.style.top = y + "px";
-
-    // change message
-    const messages = [
-      "Sigurado kaba boss? 🥺",
-      "PLEEEEEAAAASSSSSEEEE 👉👈",
-      "Libre taka piso😁",
-      "Pls na ohhh, pls pls pls",
-      "Ansakit mo namn☹️",
-      "Last chance boiii"
-    ];
-    document.getElementById("message").innerText =
-      messages[noCount % messages.length];
-    noCount++;
-  }
-
-  function sayYes() {
-    // Hide original question/buttons
-    document.querySelector("h1").style.display = "none";
-    document.getElementById("yes").style.display = "none";
-    document.getElementById("no").style.display = "none";
-    document.getElementById("message").style.display = "none";
-
-    // Show celebration with fade-in
-    const celebration = document.getElementById("celebration");
-    celebration.style.display = "block";
-    setTimeout(() => {
-      celebration.style.opacity = 1;
-    }, 50);
-
-    // After 3 seconds, fade out celebration and fade in letter
-    setTimeout(() => {
-      celebration.style.opacity = 0;
-
-      const letter = document.getElementById("letter-container");
-      letter.style.display = "block";
-      setTimeout(() => {
-        letter.style.opacity = 1;
-      }, 50);
-    }, 3000); // 3 seconds
-  }
-</script>
-
-</body>
-</html>
+Naka move on na kuta ako saimo, napanagi
